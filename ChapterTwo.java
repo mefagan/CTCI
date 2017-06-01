@@ -22,6 +22,30 @@ public class ChapterTwo {
     return start;
   }
   
+  public static ListNode removeDuplicatesSansBuffer(ListNode head) {
+    ListNode start = head;
+    ListNode current = head;
+    if (head==null || head.next==null) { 
+      return null;
+    }
+    ListNode previous = null;
+    while(current.next != null) {
+      ListNode runner = current.next;
+      while (runner != null){
+        if (runner.value == current.value && previous!=null) {
+          deleteNode(previous);
+        }
+        else if (runner.value == current.value) {
+          start = start.next;
+        }
+        runner = runner.next;
+      }
+      previous = current;
+      current = current.next;
+    }
+    return start;
+  }
+  
   public static boolean deleteNode(ListNode previousNode) {
     previousNode.next = previousNode.next.next;
     return true;
@@ -36,8 +60,8 @@ public class ChapterTwo {
   
   public static void main(String[] args) {
     
-    ListNode node1 = null;
-    /*ListNode node2 = new ListNode(3);
+    ListNode node1 = new ListNode(5);
+    ListNode node2 = new ListNode(3);
     ListNode node3 = new ListNode(3);
     ListNode node4 = new ListNode(2);
     ListNode node5 = new ListNode(9);
@@ -46,9 +70,9 @@ public class ChapterTwo {
     node2.next = node3;
     node3.next = node4;
     node4.next = node5;
-    node5.next = node6;*/
+    node5.next = node6;
     printList(node1);
-    ListNode newlist = removeDuplicates(node1);
+    ListNode newlist = removeDuplicatesSansBuffer(node1);
     printList(newlist);
     
   }

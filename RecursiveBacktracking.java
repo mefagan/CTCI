@@ -15,10 +15,22 @@ public class RecursiveBacktracking {
     return solutions;
   }
   
+  public static int findAllSubsets(String curr, String remaining, int count) {
+    if(remaining.length()==0) {
+      System.out.println(curr);
+      count++;
+    } else {
+      findAllSubsets(curr + remaining.charAt(0), remaining.substring(1), count);
+      findAllSubsets(curr, remaining.substring(1), count);
+    }
+    return count;
+  }
+  
   public static void main(String[] args) {
     int solutions = 0;
     String sample = "MAR";
-    recurseSansBacktracking("", sample, 0);
+    //recurseSansBacktracking("", sample, 0);
+    findAllSubsets("", sample, 0);
   }
 
 }
